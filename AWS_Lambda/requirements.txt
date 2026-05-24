@@ -1,4 +1,0 @@
-pymysql
-boto3
-
-Run this command to install all the packages required for this project "pip install -r requirements.txt -t ."
