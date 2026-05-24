@@ -1,0 +1,58 @@
+customer_name,gender,date_of_birth,email,email_type,phone,phone_type,city,state,country,address_type
+Hammad Qureshi,Male,2001-05-14,hammad.q@example.com,Personal,+923001234567,Mobile,Karachi,Sindh,Pakistan,Home
+Aisha Khan,Female,1998-08-22,aisha.khan@example.com,Personal,+923119876543,Mobile,Lahore,Punjab,Pakistan,Home
+Zain Ahmed,Male,2000-11-05,zain.a@work.com,Work,+923214567890,Mobile,Islamabad,ICT,Pakistan,Office
+Sana Malik,Female,1995-03-17,sana.m@example.com,Personal,+923331112223,Home,Rawalpindi,Punjab,Pakistan,Home
+Bilal Siddiqui,Male,2002-01-30,bilal.s@example.com,Personal,+923455556667,Mobile,Karachi,Sindh,Pakistan,Home
+Fatima Ali,Female,1999-07-12,fatima.a@work.com,Work,+923012223334,Mobile,Faisalabad,Punjab,Pakistan,Office
+customer_name,gender,date_of_birth,email,email_type,phone,phone_type,city,state,country,address_type
+Hammad Qureshi,Male,2001-05-14,hammad.q@work.com,Work,+923001234567,Mobile,Lahore,Punjab,Pakistan,Office
+Aisha Khan,Female,1998-08-22,aisha.k@work.com,Work,+923119876543,Mobile,Islamabad,ICT,Pakistan,Office
+Zainab Bibi,Female,1993-04-12,zainab.b@example.com,Personal,+923011112222,Mobile,Peshawar,KPK,Pakistan,Home
+Muzammil Shah,Male,1996-11-23,muzammil.s@example.com,Personal,+923122223333,Mobile,Karachi,Sindh,Pakistan,Home
+Kamran Akmal,Male,1991-02-27,kamran.a@work.com,Work,+923233334444,Mobile,Faisalabad,Punjab,Pakistan,Office
+Sana Mir,Female,1994-06-05,sana.mir@example.com,Personal,+923344445555,Home,Lahore,Punjab,Pakistan,Home
+Bilal Khan,Male,1999-09-18,bilal.k@example.com,Personal,+923455556666,Mobile,Multan,Punjab,Pakistan,Home
+Anam Amin,Female,2002-12-14,anam.a@work.com,Work,+923066667777,Mobile,Rawalpindi,Punjab,Pakistan,Office
+Idrees Ahmed,Male,1995-01-08,idrees.a@example.com,Personal,+923177778888,Mobile,Quetta,Balochistan,Pakistan,Home
+Sadia Iqbal,Female,1998-07-22,sadia.i@example.com,Personal,+923288889999,Home,Sialkot,Punjab,Pakistan,Home
+Haroon Rasheed,Male,1992-03-30,haroon.r@work.com,Work,+923399990000,Mobile,Karachi,Sindh,Pakistan,Office
+Sidra Ameen,Female,2000-10-05,sidra.a@example.com,Personal,+923400001111,Mobile,Gujranwala,Punjab,Pakistan,Home
+Noman Ali,Male,1994-08-15,noman.a@example.com,Personal,+923012224444,Mobile,Hyderabad,Sindh,Pakistan,Home
+Iram Javed,Female,1997-05-19,iram.j@work.com,Work,+923123335555,Mobile,Sukkur,Sindh,Pakistan,Office
+Asif Ali,Male,1993-10-01,asif.a@example.com,Personal,+923234446666,Mobile,Faisalabad,Punjab,Pakistan,Home
+Khadija Shah,Female,2001-02-11,khadija.s@example.com,Personal,+923345557777,Home,Lahore,Punjab,Pakistan,Home
+Yasir Shah,Male,1995-04-25,yasir.s@work.com,Work,+923456668888,Mobile,Peshawar,KPK,Pakistan,Office
+Maham Tariq,Female,1999-11-09,maham.t@example.com,Personal,+923027779999,Mobile,Rawalpindi,Punjab,Pakistan,Home
+Zohaib Khan,Male,1996-06-30,zohaib.k@example.com,Personal,+923138880000,Mobile,Islamabad,ICT,Pakistan,Home
+Ayesha Naseem,Female,2003-08-07,ayesha.n@work.com,Work,+923249991111,Mobile,Karachi,Sindh,Pakistan,Office
+Saud Shakeel,Male,1997-09-05,saud.s@example.com,Personal,+923361113333,Mobile,Karachi,Sindh,Pakistan,Home
+Fatima Sana,Female,2001-11-08,fatima.s@example.com,Personal,+923472224444,Home,Lahore,Punjab,Pakistan,Home
+Salman Ali Agha,Male,1995-03-23,salman.a@work.com,Work,+923033335555,Mobile,Multan,Punjab,Pakistan,Office
+Tuba Hassan,Female,2000-10-18,tuba.h@example.com,Personal,+923144446666,Mobile,Abbottabad,KPK,Pakistan,Home
+Arshad Nadeem,Male,1997-01-02,arshad.n@example.com,Personal,+923255557777,Mobile,Mianwali,Punjab,Pakistan,Home
+Diana Baig,Female,1995-10-15,diana.b@work.com,Work,+923366668888,Mobile,Gilgit,GB,Pakistan,Office
+Imran Butt,Male,1992-12-27,imran.b@example.com,Personal,+923477779999,Mobile,Lahore,Punjab,Pakistan,Home
+Nashra Sandhu,Female,1998-04-18,nashra.s@example.com,Personal,+923048880000,Home,Gujrat,Punjab,Pakistan,Home
+Khushdil Shah,Male,1995-02-07,khushdil.s@work.com,Work,+923159991111,Mobile,Bannu,KPK,Pakistan,Office
+Aliya Riaz,Female,1992-05-28,aliya.r@example.com,Personal,+923260002222,Mobile,Jhang,Punjab,Pakistan,Home
+Usama Mir,Male,1995-12-23,usama.m@example.com,Personal,+923371113333,Mobile,Sialkot,Punjab,Pakistan,Home
+Jaferia Rauf,Female,1997-09-22,jaferia.r@work.com,Work,+923482224444,Mobile,Karachi,Sindh,Pakistan,Office
+Mohammad Nawaz,Male,1994-03-21,m.nawaz@example.com,Personal,+923053335555,Mobile,Rawalpindi,Punjab,Pakistan,Home
+Anam Amin,Female,2002-12-14,anam.amin@home.com,Personal,+923066667777,Mobile,Sargodha,Punjab,Pakistan,Home
+Iftikhar Ahmed,Male,1990-09-03,chacha.ifty@work.com,Work,+923274446666,Mobile,Peshawar,KPK,Pakistan,Office
+Muneeba Ali,Female,1997-08-08,muneeba.a@example.com,Personal,+923385557777,Home,Lahore,Punjab,Pakistan,Home
+Zaman Khan,Male,2001-09-10,zaman.k@example.com,Personal,+923496668888,Mobile,Miranshah,KPK,Pakistan,Home
+Sadia Iqbal,Female,1998-07-22,sadia.iqbal@work.com,Work,+923288889999,Mobile,Faisalabad,Punjab,Pakistan,Office
+Abrar Ahmed,Male,1998-10-16,abrar.a@example.com,Personal,+923017779999,Mobile,Karachi,Sindh,Pakistan,Home
+Najiha Alvi,Female,2000-01-30,najiha.a@example.com,Personal,+923128880000,Mobile,Bahawalpur,Punjab,Pakistan,Home
+Haris Rauf,Male,1993-11-07,haris.150@work.com,Work,+923239991111,Mobile,Rawalpindi,Punjab,Pakistan,Office
+Gull Feroza,Female,1998-05-14,gull.f@example.com,Personal,+923340002222,Home,Multan,Punjab,Pakistan,Home
+Shahnawaz Dahani,Male,1998-08-05,dahani.33@example.com,Personal,+923451113333,Mobile,Larkana,Sindh,Pakistan,Home
+Syeda Aroob Shah,Female,2003-12-31,aroob.s@work.com,Work,+923062224444,Mobile,Karachi,Sindh,Pakistan,Office
+Mohammad Haris,Male,2001-03-30,haris.google@example.com,Personal,+923173335555,Mobile,Peshawar,KPK,Pakistan,Home
+Natalia Pervaiz,Female,1995-12-25,natalia.p@example.com,Personal,+923284446666,Mobile,Lahore,Punjab,Pakistan,Home
+Saim Ayub,Male,2002-05-24,saim.a@work.com,Work,+923395557777,Mobile,Karachi,Sindh,Pakistan,Office
+Rameen Shamim,Female,1996-01-19,rameen.s@example.com,Personal,+923406668888,Home,Karachi,Sindh,Pakistan,Home
+Irfan Khan Niazi,Male,2002-08-12,irfan.k@example.com,Personal,+923017770000,Mobile,Mianwali,Punjab,Pakistan,Home
+Waheeda Akhtar,Female,1994-11-03,waheeda.a@work.com,Work,+923128881111,Mobile,Lahore,Punjab,Pakistan,Office
