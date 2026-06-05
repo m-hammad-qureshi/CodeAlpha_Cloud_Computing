@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure User Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .dashboard-card { background: #1e293b; border: 1px solid #334155; width: 100%; max-width: 550px; border-radius: 12px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .header { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #334155; padding-bottom: 15px; }
+        .header h1 { font-size: 24px; color: #38bdf8; font-weight: 600; }
+        .header p { color: #94a3b8; font-size: 14px; margin-top: 5px; }
+        .status-badge { display: inline-block; background: #064e3b; color: #34d399; font-size: 12px; font-weight: bold; padding: 4px 12px; border-radius: 20px; margin-top: 10px; border: 1px solid #059669; }
+        .info-group { display: flex; flex-direction: column; gap: 16px; margin-bottom: 25px; }
+        .info-row { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 14px 18px; border-radius: 8px; border: 1px solid #1e293b; }
+        .info-label { color: #94a3b8; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        .info-value { color: #f1f5f9; font-size: 15px; font-weight: 500; word-break: break-all; padding-left: 20px;}
+        .info-value.highlight { color: #38bdf8; font-weight: bold; }
+        .footer-btn { display: block; text-align: center; background: #ef4444; color: white; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: 600; transition: background 0.2s; }
+        .footer-btn:hover { background: #dc2626; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-card">
+        <div class="header">
+            <h1>Secure User Dashboard</h1>
+            <p>Data Status: Encrypted at Rest (AES-256) | Decrypted Session</p>
+            <span class="status-badge">✓ Authenticated Secure Session</span>
+        </div>
+
+        <div class="info-group">
+            <div class="info-row">
+                <span class="info-label">Account ID</span>
+                <span class="info-value"># {{ id }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Username</span>
+                <span class="info-value highlight">{{ user }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Encrypted Email</span>
+                <span class="info-value">{{ email }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Encrypted Phone</span>
+                <span class="info-value">{{ phone }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Hashed Pass</span>
+                <span class="info-value">{{ password }}</span>
+            </div>
+        </div>
+
+        <a href="/login" class="footer-btn">Logout</a>
+    </div>
+
+</body>
+</html>
