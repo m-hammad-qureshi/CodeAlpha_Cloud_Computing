@@ -1,16 +1,19 @@
 SQL Injection Test
 
-Test 1: The "Always True" Bypass (The most famous attack)
+Test 1: The "Always True" Bypass (admin' OR '1'='1)
 
-Query 1 --> admin' OR '1'='1 	--> Enter this query in username 
+How a vulnerable app fails: A vulnerable app dynamically builds strings like WHERE username = 'admin' OR '1'='1'. Because '1'='1' is always true, it logs the attacker in as the first user in the table without a password.
 
-Test 2: The Comment Attack
+How your app secures it: Your app utilizes SQLAlchemy's parameterized queries (SELECT * FROM users WHERE username = :username). Because of this, the database treats the entire injection payload (admin' OR '1'='1) as a single, literal username string. It looks for a user whose actual name on the passport is literally admin' OR '1'='1. Since that user doesn't exist, it safely returns None and triggers your "The user does not exist." flash message!
 
-Query 1 --> admin' --		--> -- double dash used to comment the code in sql
+Test 2: The Comment Attack (admin' --)
 
-Test 3: The Stacked Query Data Deletion (The dangerous one)
+How a vulnerable app fails: In a vulnerable setup, the -- comments out the rest of the database's password check query line entirely, letting the attacker pass without entering a password.
 
-Query 1 --> testuser'; DROP TABLE users; --   --> 
+How your app secures it: Again, thanks to your parameterized binding structure, the -- characters lose all structural SQL meanings. The database engine escapes them automatically, searching for a literal text string matching admin' --.
 
-After not getting an enterance hacker will try to destroy your databse by ending the query with semi-colon and passing a new query some like drop table.
+Test 3: The Stacked Query Data Deletion (testuser'; DROP TABLE users; --)
 
+How a vulnerable app fails: A vulnerable raw text concatenation maps the semi-colon ; as the complete ending of the first command, letting the engine execute the completely separate DROP TABLE users; command immediately afterward, destroying your backend data storage.
+
+How your app secures it: Your architecture completely walls this off. The parameter binder safely forces the database to wrap the semi-colon and the drop instruction into an isolated string variable value. It never gets executed as code, completely keeping your tables safe from deletion!
