@@ -1,8 +1,12 @@
-""" To run the flask app use this command in terminal "flask --app main run", "python main.py run", but this will not refresh the app along with the changes you made. To refresh it with your code updating use debug mode like this "flask --app main run --debug" here main is your file name in my case the file name is main. Or you can just pass the debug=True like this app.run(debug=True). """
+""" To run the flask app use this command in terminal "flask --app main run", "python main.py run", but this will not refresh the app along with the changes you made. To refresh it with your code updating use debug mode like this "flask --app main run --debug" here main is your file name in my case the file name is main. Or you can just pass the debug=True like this app.run(debug=True) at code line 229. """
 
-""" Hashing using the python bcrypt module is a one way for verification, once the password is hashed you never back it in original form. """
-""" Cryptography is a two way of recovery like after encrypting the data you can also decrypt it again. """
+""" 
+Hashing using the Python bcrypt module is a one-way process used for secure verification. 
+Once a password is encrypted into a hash, it can never be decrypted back into its original form. 
 
+Cryptography (using Fernet AES-256) is a two-way process. It allows us to encrypt sensitive data 
+at rest before saving it to the database, and safely decrypt it back to human-readable form when needed.
+"""
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from sqlalchemy import create_engine, text
 import bcrypt
@@ -10,9 +14,11 @@ from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 import os
 
-load_dotenv()   # Will load all the keys and sensitive data stored in the .env file.
+# Load environment variables from the local .env file
+load_dotenv()   
 
-raw_key = os.getenv("ENCRYPTION_KEY")     # Encryption key for the email and phone.
+# Encryption key for the email and phone.
+raw_key = os.getenv("ENCRYPTION_KEY")     
 
 if raw_key:
     encoded_key = raw_key.encode('utf-8')
@@ -21,7 +27,11 @@ else:
     raise ValueError("Encryption key not found in the .env file.")
 
 
-"""This function will encrypt the user data while entering the data of newly entered user at registration, it will encode the human language into the binary language for computer understanding, then it will encrypt this encoded text and in the end return to its decoded form to store into the database."""
+"""
+This function encrypts sensitive user data (like emails or phone numbers) before it is stored. 
+It encodes human-readable string data into bytes, encrypts it using AES-256 via Fernet, 
+and returns it as a decoded string compatible with database text fields.
+"""
 
 def encrypted_data(plain_text):
     if not plain_text:
@@ -30,7 +40,11 @@ def encrypted_data(plain_text):
     encrypted_text = cipher.encrypt(plain_text_byte)
     return encrypted_text.decode('utf-8')
 
-"""This function decrypt the user data will bring the data into its original form, with same functionality of encrypted function like encoding, decrypting and decoding."""
+"""
+This function decrypts encrypted database text fields back into their original forms. 
+It handles checking data types, safely passing them through the cryptographic cipher, 
+and converting the output bytes back into a standard Python string.
+"""
 
 def decrypted_data(cipher_text):
     if not cipher_text:
@@ -46,46 +60,51 @@ def decrypted_data(cipher_text):
 
 base_url = os.getenv("DATABASE_URL")
 def db_insert():
-    """ 2. Extract the database name you want to use (e.g., 'user_auth_db') """
-    # db_name = base_url.split('/')[-1]
+    """ 
+    AWS Cloud Deployment Code Block (Commented out for standalone Local/Offline Testing):
+    ---------------------------------------------------------------------------------
+    db_name = base_url.split('/')[-1]
+    root_url = base_url.rsplit('/', 1)[0] + '/information_schema'
+    root_engine = create_engine(root_url)
     
-    """ 3. Connect to the server root level first to initialize the schema container safely """
-    # root_url = base_url.rsplit('/', 1)[0] + '/information_schema'
-    # root_engine = create_engine(root_url)
+    with root_engine.connect() as root_conn:
+        root_conn.execute(text(f"CREATE DATABASE IF NOT EXISTS {db_name};"))
+        root_conn.commit()
+    root_engine.dispose()
+    """
     
-    # with root_engine.connect() as root_conn:
-    """ Create the custom database schema container if it doesn't exist yet """
-    #     root_conn.execute(text(f"CREATE DATABASE IF NOT EXISTS {db_name};"))
-    #     root_conn.commit()
-    # root_engine.dispose()
-
     target_engine = create_engine(base_url, echo= True)    
     with target_engine.connect() as conn:
-        conn.execute(text('''create table if not exists 
-                    users (id integer Primary key autoincrement,
-                        username varchar(100) NOT NULL, 
-                        email varchar(250) NOT NULL, 
-                        phone varchar(250) NOT NULL,
-                        password varchar(250) NOT NULL);'''))
+        conn.execute(text('''CREATE TABLE IF NOT EXISTS users (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            username VARCHAR(100) NOT NULL, 
+                            email VARCHAR(250) NOT NULL, 
+                            phone VARCHAR(250) NOT NULL,
+                            password VARCHAR(250) NOT NULL);'''))
         conn.commit()
     target_engine.dispose()    
 
+# Execute database system
 db_insert()
 
 engine = create_engine(base_url, echo=True)
 
 application = Flask(__name__)
 
-""" Here __name__ is acting like a map for the flask as this library is used to create web apps so we will need html for the text css for the style and some JS too. So, this special variable is used to navigate the right files need for the application. Upon running the file python automatically sets the __name__ to the value __main__. And __main__ is a string value assigned from the python. Assign the file with name and main as the first file as the parent file. """
+""" 
+The __name__ variable acts as a core roadmap helper for Flask. 
+It tells the framework where to look for supporting frontend files like the 'templates' 
+folder for HTML and static directories for styling. When executing a file directly, 
+Python automatically configures this value to '__main__'.
+"""
 
 application.secret_key = os.getenv("APP_SESSION_KEY")
+
+""" route is a decorator which tells the flask that which function will trigger, like here passed / in the route is where this app will land first and it will tell what to show the user with the help of this function. """
 
 @application.route('/')
 def root():
     return redirect(url_for('login'))
-
-
-""" route is a decorator which tells the flask that which function will trigger, like here passed / in the route is where this app will land first and it will tell what to show the user with the help of this function. """
 
 @application.route('/Home')
 def home():
@@ -98,14 +117,17 @@ def home():
             }).fetchone()
             if data_result:
 
-# """ The mapping method is used to properly assign a name of the column to flask app so it can't get distracted and bring the wrong data from the table. """
+                # SQLAlchemy _mapping configuration maps specific column strings straight to the application
                 id_data = data_result._mapping['id']
                 username_data = data_result._mapping['username']
                 email_data = data_result._mapping['email']
-                email_data_decrypted = decrypted_data(email_data) # --> To look the decrypted email
                 phone_data = data_result._mapping['phone']
-                phone_data_decrypted = decrypted_data(phone_data) # --> To look the decrypted phone
                 hashed_pass = data_result._mapping['password']
+                
+                # Decrypting data streams on the fly to render clean data securely back onto the Home user dashboard
+                
+                email_data_decrypted = decrypted_data(email_data) # --> To look the decrypted email
+                phone_data_decrypted = decrypted_data(phone_data) # --> To look the decrypted phone
 
                 return render_template('index.html', id = id_data,user = username_data, email = email_data, phone = phone_data, password = hashed_pass)
             return redirect(url_for('login'))
@@ -119,6 +141,7 @@ def login():
         password_input = request.form.get('password')
 
         with engine.connect() as conn:
+            # Parameterized Query architecture strictly neutralizes SQL Injection vectors
             login_query = text("select * from users where username = :username")
             login_result = conn.execute(login_query, {
                 "username": username_input}).fetchone()
@@ -129,8 +152,9 @@ def login():
             stored_pass = login_result._mapping['password']
             user_pass_byte = password_input.encode('utf-8')
             stored_pass_byte = stored_pass.encode('utf-8')
+
+            # Utilizing bcrypt secure mathematical evaluation checks to match hashes safely
             if bcrypt.checkpw(user_pass_byte, stored_pass_byte):  
-                # --> checking if the hash-pass in the db and user given pass while login is matching or not.
                 print("Welcome back")
                 session["username"] = username_input
                 return redirect(url_for('home'))  
@@ -147,12 +171,13 @@ def register():
         email_input = request.form.get('email')
         phone_input = request.form.get('phone')
         password_input = request.form.get('password')
-
+        
+        # Two-Way Data Cryptography Encrypts Personal Identifiable Information (PII) data fields at rest
         email_encrypted = encrypted_data(email_input) # --> Encrypting the email using encrypted function
         phone_encrypted = encrypted_data(phone_input) # --> Same encryption step for the phone data
 
         with engine.connect() as conn:
-            query = text('select * from users where username = :username') # --> Parameterized query
+            query = text('select * from users where username = :username')
             result = conn.execute(query,{
                 "username": username_input}).fetchone()
             
@@ -164,7 +189,8 @@ def register():
             all_rows_result = conn.execute(all_rows).fetchall()
 
             duplicate_found = False
-
+            
+            # Validating decryption values systematically to intercept cloud data redundancy anomalies
             for row in all_rows_result:
                 if decrypted_data(row._mapping['email']) == email_input or decrypted_data(row._mapping['phone']) == phone_input:
                     duplicate_found = True
@@ -199,4 +225,5 @@ def register():
 
 
 if __name__ == '__main__':
-    application.run(host="0.0.0.0", port=5000)
+    # application.run(host="0.0.0.0", port=5000)  --> For AWS
+    application.run(debug=True)                   # --> for local deployement
